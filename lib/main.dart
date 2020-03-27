@@ -3,13 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:audioplayers/audio_cache.dart';
 
 void main() => runApp(MyApp());
-void click(value) {
-  final player = AudioCache();
-  player.play('note$value.wav');
-}
 
 class MyApp extends StatelessWidget {
-  int value;
+  Expanded buildKey({Color color, int value}) {
+    return Expanded(
+      child: FlatButton(
+        onPressed: () {
+          final player = AudioCache();
+          player.play('note$value.wav');
+        },
+        color: color,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,67 +25,13 @@ class MyApp extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Expanded(
-                child: FlatButton(
-                  onPressed: () {
-                    click(1);
-                  },
-                  color: Colors.red,
-                ),
-              ),
-              Expanded(
-                child: FlatButton(
-                  onPressed: () {
-                    click(2);
-                  },
-                  color: Colors.orange,
-                ),
-              ),
-              Expanded(
-                child: FlatButton(
-                  onPressed: () {
-                    click(3);
-                  },
-                  child: null,
-                  color: Colors.yellow,
-                ),
-              ),
-              Expanded(
-                child: FlatButton(
-                  onPressed: () {
-                    click(4);
-                  },
-                  child: null,
-                  color: Colors.lightGreen,
-                ),
-              ),
-              Expanded(
-                child: FlatButton(
-                  onPressed: () {
-                    click(5);
-                  },
-                  child: null,
-                  color: Colors.green,
-                ),
-              ),
-              Expanded(
-                child: FlatButton(
-                  onPressed: () {
-                    click(6);
-                  },
-                  child: null,
-                  color: Colors.blue,
-                ),
-              ),
-              Expanded(
-                child: FlatButton(
-                  onPressed: () {
-                    click(7);
-                  },
-                  child: null,
-                  color: Colors.purple,
-                ),
-              ),
+              buildKey(color: Colors.red, value: 1),
+              buildKey(color: Colors.orange, value: 2),
+              buildKey(color: Colors.yellow, value: 3),
+              buildKey(color: Colors.lightGreen, value: 4),
+              buildKey(color: Colors.green, value: 5),
+              buildKey(color: Colors.blue, value: 6),
+              buildKey(color: Colors.purple, value: 7),
             ],
           ),
         ),
